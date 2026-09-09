@@ -13,6 +13,8 @@ class MainApp extends StatefulWidget {
 
 class _MainAppState extends State<MainApp> {
 
+  String soma = '+', sub = '-', multi = '*', div = '/';
+
   TextEditingController valor1Controller = TextEditingController();
   TextEditingController valor2Controller = TextEditingController();
 
@@ -66,10 +68,10 @@ class _MainAppState extends State<MainApp> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                  
-                  ElevatedButton(onPressed: soma, child: Text('+')),
-                  ElevatedButton(onPressed: sub, child: Text('-')),
-                  ElevatedButton(onPressed: multi, child: Text('*')),
-                  ElevatedButton(onPressed: div, child: Text('/')),
+                  ElevatedButton(onPressed: ()=>calcular(soma), child: Text('+')),
+                  ElevatedButton(onPressed: ()=>calcular(sub), child: Text('-')),
+                  ElevatedButton(onPressed: ()=>calcular(multi), child: Text('*')),
+                  ElevatedButton(onPressed: ()=>calcular(div), child: Text('/')),
                 ],
               ),
             Padding(
@@ -83,48 +85,33 @@ class _MainAppState extends State<MainApp> {
       ),
     );
   }
-  double resultado = 0; 
+   double resultado = 0; 
 
-  void soma() {
-  double valor1 = double.parse(valor1Controller.text);
-  double valor2 = double.parse(valor2Controller.text);
-  setState(() {
-    resultado = valor1 + valor2;
-  });
-
-
-  }
-
-  void sub() {
-  double valor1 = double.parse(valor1Controller.text);
-  double valor2 = double.parse(valor2Controller.text);
-  setState(() {
-    resultado = valor1 - valor2;
-  });
-
-  }
-
-
-
-
-  void multi() {
-  double valor1 = double.parse(valor1Controller.text);
-  double valor2 = double.parse(valor2Controller.text);
-  setState(() {
-    resultado = valor1 * valor2;
-  });
-
-  }
-
-
-
-  void div() {
-  double valor1 = double.parse(valor1Controller.text);
-  double valor2 = double.parse(valor2Controller.text);
-  setState(() {
-    resultado = valor1 / valor2;
-  });
-
+  void calcular(String sinal)
+  {
+   double valor1 = double.parse(valor1Controller.text);
+   double valor2 = double.parse(valor2Controller.text);
+   
+ 
+    if(sinal == '+')
+    {
+     resultado = valor1 + valor2;
+    }
+    else if(sinal == '-')
+    {
+      resultado = valor1 - valor2;
+    }
+    else if(sinal == '*')
+    {
+      resultado = valor1 * valor2;
+    }
+    else 
+    {
+      resultado = valor1 / valor2;
+    }
+    setState(() {
+      resultado;
+    });
   }
 
   void reiniciar() {
